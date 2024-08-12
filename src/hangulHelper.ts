@@ -1,6 +1,6 @@
 // hangulHelper.ts
 
-import { Cho, Jung, Jong, CHO, JUNG, JONG } from "@/HangulTypes";
+import { type Cho, type Jung, type Jong, CHO, JUNG, JONG } from "@/HangulTypes";
 // 초성, 중성, 종성 배열 선언
 
 const HANGUL_OFFSET = 0xac00;
