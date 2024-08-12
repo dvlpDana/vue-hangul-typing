@@ -25,10 +25,9 @@ import {
 } from "vue";
 
 import { disassembleHangul, assembleHangul } from "@/hangulHelper";
-import { HangulChar } from "@/HangulTypes";
 
 export default defineComponent({
-  name: "TypingEffect",
+  name: "HangulTyping",
   props: {
     text: {
       type: String,
@@ -74,7 +73,9 @@ export default defineComponent({
   emits: ["typing-start", "typing-end"],
   setup(props, { emit }) {
     const currentText = ref("");
-    const typingInterval = ref<number | undefined>(undefined);
+    const typingInterval = ref<ReturnType<typeof setInterval> | undefined>(
+      undefined
+    );
     const isTyping = ref(true);
     const currentIndex = ref(0);
 
@@ -88,10 +89,7 @@ export default defineComponent({
       return baseInterval;
     };
 
-    const updateText = (
-      splitText: HangulChar[],
-      assembledText: HangulChar[]
-    ) => {
+    const updateText = (splitText: string[], assembledText: string[]) => {
       if (currentIndex.value < splitText.length) {
         assembledText.push(splitText[currentIndex.value]);
         currentText.value = assembleHangul(assembledText);
@@ -124,8 +122,8 @@ export default defineComponent({
 
         emit("typing-start"); // 타이핑 시작 이벤트 emit
 
-        const splitText = disassembleHangul(textToType) as HangulChar[];
-        const assembledText: HangulChar[] = [];
+        const splitText = disassembleHangul(textToType);
+        const assembledText: string[] = [];
         typingInterval.value = setInterval(() => {
           if (!props.isPaused) {
             updateText(splitText, assembledText);

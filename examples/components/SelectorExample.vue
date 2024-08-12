@@ -5,7 +5,7 @@
       이 텍스트는 외부 요소에서 가져와 타이핑 됩니다.
     </div>
     <div class="typing-box">
-      <TypingEffect
+      <HangulTyping
         selector="#source-text"
         :intervalType="100"
         :showCursor="true"
@@ -16,11 +16,11 @@
 </template>
 
 <script lang="ts">
-import TypingEffect from "../../src/TypingEffect.vue";
+import HangulTyping from "../../src/HangulTyping.vue";
 
 export default {
   components: {
-    TypingEffect,
+    HangulTyping,
   },
 };
 </script>

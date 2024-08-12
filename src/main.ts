@@ -1,2 +1,2 @@
-import TypingEffect from "@/TypingEffect.vue";
-export default TypingEffect;
+import HangulTyping from "@/HangulTyping.vue";
+export default HangulTyping;

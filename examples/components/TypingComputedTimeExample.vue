@@ -2,7 +2,7 @@
   <div class="example-container">
     <h2>Typing Effect with Time Tracking</h2>
     <div class="typing-box">
-      <TypingEffect
+      <HangulTyping
         text="이 예제는 타이핑 소요 시간을 계산합니다."
         :showCursor="true"
         @typing-end="handleTypingEnd"
@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { ref } from "vue";
-import TypingEffect from "../../src/TypingEffect.vue";
+import HangulTyping from "../../src/HangulTyping.vue";
 
 const typingCompleted = ref(false);
 const typingTime = ref(0);
@@ -43,7 +43,7 @@ const handleTypingEnd = () => {
 
 export default {
   components: {
-    TypingEffect,
+    HangulTyping,
   },
   setup() {
     return {

@@ -2,8 +2,8 @@
   <div class="example-container">
     <h2>Typing Effect with Pause and Resume</h2>
     <div class="typing-box">
-      <TypingEffect
-        ref="typingEffect"
+      <HangulTyping
+        ref="HangulTyping"
         text="안녕하세요.\n 일시정지와 재개를 지원하는 예제입니다."
         :intervalType="80"
         :isPaused="isPaused"
@@ -22,11 +22,11 @@
 
 <script lang="ts">
 import { ref } from "vue";
-import TypingEffect from "../../src/TypingEffect.vue";
+import HangulTyping from "../../src/HangulTyping.vue";
 
 export default {
   components: {
-    TypingEffect,
+    HangulTyping,
   },
   setup() {
     const isPaused = ref(false);
