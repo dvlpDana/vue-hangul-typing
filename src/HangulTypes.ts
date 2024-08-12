@@ -80,6 +80,3 @@ export const JONG = [
 export type Cho = (typeof CHO)[number];
 export type Jung = (typeof JUNG)[number];
 export type Jong = (typeof JONG)[number];
-
-// HangulChar는 초성, 중성, 종성 외에 백스페이스와 줄바꿈을 포함한 문자 타입
-export type HangulChar = Cho | Jung | Jong | "\b" | "\n" | string;

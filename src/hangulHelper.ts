@@ -1,20 +1,20 @@
 // hangulHelper.ts
 
-import { Cho, Jung, Jong, CHO, JUNG, JONG, HangulChar } from "@/HangulTypes";
+import { Cho, Jung, Jong, CHO, JUNG, JONG } from "@/HangulTypes";
 // 초성, 중성, 종성 배열 선언
 
 const HANGUL_OFFSET = 0xac00;
 
-function _isCho(c: number): boolean {
-  return CHO.includes(String.fromCharCode(c) as Cho);
+function _isCho(char: string): char is Cho {
+  return CHO.includes(char as Cho);
 }
 
-function _isJung(c: number): boolean {
-  return JUNG.includes(String.fromCharCode(c) as Jung);
+function _isJung(char: string): char is Jung {
+  return JUNG.includes(char as Jung);
 }
 
-function _isJong(c: number): boolean {
-  return JONG.includes(String.fromCharCode(c) as Jong);
+function _isJong(char: string): char is Jong {
+  return JONG.includes(char as Jong);
 }
 
 function _isHangul(c: number): boolean {
@@ -22,12 +22,12 @@ function _isHangul(c: number): boolean {
 }
 
 // Disassemble Function
-function disassembleHangul(string: string): HangulChar[] {
+function disassembleHangul(string: string): string[] {
   if (string === null) {
     throw new Error("Arguments cannot be null");
   }
 
-  const result: HangulChar[] = [];
+  const result: string[] = [];
   const length = string.length;
 
   for (let i = 0; i < length; i++) {
@@ -35,12 +35,12 @@ function disassembleHangul(string: string): HangulChar[] {
 
     // 백스페이스 처리
     if (char === "\\" && i < length - 1 && string[i + 1] === "b") {
-      result.push("\b" as HangulChar);
+      result.push("\b");
       i++; // Skip the 'b' character
     }
     // 줄바꿈 처리
     else if (char === "\\" && i < length - 1 && string[i + 1] === "n") {
-      result.push("\n" as HangulChar);
+      result.push("\n");
       i++; // Skip the 'n' character
     } else {
       let code = char.charCodeAt(0);
@@ -66,7 +66,7 @@ function disassembleHangul(string: string): HangulChar[] {
           result.push(jong);
         }
       } else {
-        result.push(char as HangulChar); // 한글이 아닌 경우 그대로 추가
+        result.push(char); // 한글이 아닌 경우 그대로 추가
       }
     }
   }
@@ -74,7 +74,7 @@ function disassembleHangul(string: string): HangulChar[] {
   return result;
 }
 
-function assembleHangul(disassembled: HangulChar[]): string {
+function assembleHangul(disassembled: string[]): string {
   let result = "";
   let cho: Cho | undefined;
   let jung: Jung | undefined;
@@ -82,6 +82,7 @@ function assembleHangul(disassembled: HangulChar[]): string {
 
   for (let i = 0; i < disassembled.length; i++) {
     const char = disassembled[i];
+
     if (char === "\b") {
       // 백스페이스 문자를 만나면 마지막 한글 글자를 삭제
       if (result.length > 0) {
@@ -95,46 +96,43 @@ function assembleHangul(disassembled: HangulChar[]): string {
       cho = undefined;
       jung = undefined;
       jong = undefined;
-    } else if (_isCho(char.charCodeAt(0))) {
+    } else if (_isCho(char)) {
       if (cho && jung) {
         if (jong) {
           result += combineHangul(cho, jung, jong);
-          cho = char as Cho;
+          cho = char;
           jung = undefined;
           jong = undefined;
         } else {
-          if (
-            i + 1 < disassembled.length &&
-            _isJung(disassembled[i + 1].charCodeAt(0))
-          ) {
+          if (i + 1 < disassembled.length && _isJung(disassembled[i + 1])) {
             result += combineHangul(cho, jung);
-            cho = char as Cho;
+            cho = char;
             jung = undefined;
           } else {
             jong = char as Jong;
           }
         }
       } else {
-        cho = char as Cho;
+        cho = char;
       }
-    } else if (_isJung(char.charCodeAt(0))) {
+    } else if (_isJung(char)) {
       if (jung) {
         result += combineHangul(cho, jung, jong);
         cho = undefined;
-        jung = char as Jung;
+        jung = char;
         jong = undefined;
       } else {
-        jung = char as Jung;
+        jung = char;
       }
-    } else if (_isJong(char.charCodeAt(0))) {
+    } else if (_isJong(char)) {
       if (jung) {
         if (jong) {
           result += combineHangul(cho, jung, jong);
           cho = undefined;
           jung = undefined;
-          jong = char as Jong;
+          jong = char;
         } else {
-          jong = char as Jong;
+          jong = char;
         }
       } else {
         result += combineHangul(cho, jung, jong);
