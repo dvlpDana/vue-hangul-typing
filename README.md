@@ -1,6 +1,6 @@
 # Vue Typing Effect Component
 
-![Codecov](https://codecov.io/gh/dvlpDana/vue-typing-effect-component/branch/main/graph/badge.svg)
+![Codecov](https://codecov.io/gh/dvlpDana/vue-hangul-typing/branch/main/graph/badge.svg)
 
 
 https://github.com/user-attachments/assets/31338d1b-fcae-4be1-996a-9043d6d2a3f4
@@ -22,7 +22,7 @@ https://github.com/user-attachments/assets/31338d1b-fcae-4be1-996a-9043d6d2a3f4
 컴포넌트를 설치하려면 npm을 사용할 수 있습니다.
 
 ```bash
-npm install vue-typing-effect-component
+npm install hangul-typing
 ```
 
 
@@ -55,7 +55,7 @@ npm install vue-typing-effect-component
   <div class="example-container">
     <h2>Typing Effect with Time Tracking</h2>
     <div class="typing-box">
-      <TypingEffect
+      <HangulTyping
         text="이 예제는 타이핑 소요 시간을 계산합니다."
         :showCursor="true"
         @typing-end="handleTypingEnd"
@@ -68,9 +68,9 @@ npm install vue-typing-effect-component
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from "vue";
-import TypingEffect from "../../src/TypingEffect.vue";
+import HangulTyping from "@/HangulTyping.vue";
 
 const typingCompleted = ref(false);
 const typingTime = ref(0);
@@ -94,20 +94,6 @@ const handleTypingEnd = () => {
   typingCompleted.value = true;
   startTime = 0; // reset
 };
-
-export default {
-  components: {
-    TypingEffect,
-  },
-  setup() {
-    return {
-      typingCompleted,
-      typingTime,
-      handleTypingStart,
-      handleTypingEnd,
-    };
-  },
-};
 </script>
 ```
 
@@ -122,22 +108,12 @@ export default {
   <div class="example-container">
     <h2>Basic Typing Effect</h2>
     <div class="typing-box">
-      <TypingEffect
+      <HangulTyping
         text="안녕하세요.\n기본 예제입니다."
       />
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import TypingEffect from "@/TypingEffect.vue";
-
-export default {
-  components: {
-    TypingEffect,
-  },
-};
-</script>
 ```
 
 #### 타이핑 효과 중간에 일시정지 및 재개
@@ -146,8 +122,8 @@ export default {
   <div class="example-container">
     <h2>Typing Effect with Pause and Resume</h2>
     <div class="typing-box">
-      <TypingEffect
-        ref="typingEffect"
+      <HangulTyping
+        ref="HangulTyping"
         text="타이핑 효과를 일시정지하고 다시 시작합니다."
         :intervalType="50"
         :humanize="20"
@@ -161,32 +137,18 @@ export default {
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from "vue";
-import TypingEffect from "@/TypingEffect.vue";
+import HangulTyping from "@/HangulTyping.vue";
 
-export default {
-  components: {
-    TypingEffect,
-  },
-  setup() {
-    const typingEffect = ref(null);
-
-    const pauseTyping = () => {
-      typingEffect.value.pauseTyping();
-    };
-
-    const resumeTyping = () => {
-      typingEffect.value.resumeTyping();
-    };
-
-    return {
-      pauseTyping,
-      resumeTyping,
-      typingEffect,
-    };
-  },
+const pauseTyping = () => {
+  HangulTyping.value.pauseTyping();
 };
+
+const resumeTyping = () => {
+  HangulTyping.value.resumeTyping();
+};
+
 </script>
 ```
 
@@ -199,7 +161,7 @@ export default {
       이 텍스트는 외부 요소에서 가져와 타이핑 됩니다.
     </div>
     <div class="typing-box">
-      <TypingEffect
+      <HangulTyping
         selector="#source-text"
         :intervalType="100"
         :showCursor="true"
@@ -208,16 +170,6 @@ export default {
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import TypingEffect from "@/TypingEffect.vue";
-
-export default {
-  components: {
-    TypingEffect,
-  },
-};
-</script>
 ```
 
 ## Contributing

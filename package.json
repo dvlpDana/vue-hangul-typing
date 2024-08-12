@@ -1,19 +1,21 @@
 {
-  "name": "typing-effect-component",
+  "name": "hangul-typing",
   "version": "1.0.0",
   "author": "ShimDahnBee",
-  "description": "A Vue.js component that provides a typing effect for text.",
-  "main": "dist/typing-effect-component.common.js",
-  "module": "dist/typing-effect-component.umd.js",
+  "description": "A Vue.js component that provides a typing effect for Hangul.",
+  "main": "dist/hangul-typing.common.js",
+  "module": "dist/hangul-typing.umd.js",
   "files": [
     "dist"
   ],
   "bugs": {
-    "url": "https://github.com/dvlpDana/vue-typing-effect-component/issues"
+    "url": "https://github.com/dvlpDana/vue-hangul-typing/issues"
   },
-  "homepage": "https://github.com/dvlpDana/vue-typing-effect-component#readme",
+  "homepage": "https://github.com/dvlpDana/vue-hangul-typing#readme",
   "keywords": [
     "vue",
+    "hangul",
+    "hangul-typing",
     "typing-effect",
     "korean",
     "한글",
@@ -22,37 +24,34 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dvlpDana/vue-typing-effect-component.git"
+    "url": "git+https://github.com/dvlpDana/vue-hangul-typing.git"
   },
   "scripts": {
-    "serve:examples": "vue-cli-service serve --entry examples/main.ts",
-    "build": "vue-cli-service build --target lib src/main.ts",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test": "vitest run",
+    "serve:examples": "vite --config vite.config.examples.ts",  
+    "test:watch": "vitest",
+    "lint": "eslint --ext .ts,.vue src/"
   },
-  "dependencies": {
+  "peerDependencies": {
     "vue": "^3.2.13"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-plugin-typescript": "~5.0.0",
-    "@vue/cli-plugin-unit-jest": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
+    "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
-    "@vue/test-utils": "^2.0.0-0",
-    "@vue/vue3-jest": "^27.0.0-alpha.1",
-    "babel-jest": "^27.0.6",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
-    "jest": "^27.0.5",
     "prettier": "^2.4.1",
-    "ts-jest": "^27.0.4",
-    "typescript": "~4.5.5"
+    "typescript": "~4.5.5",
+    "vite": "^4.0.0",
+    "vitest": "^0.30.1",
+    "@vue/test-utils": "^2.0.0-0",
+    "vue-tsc": "^0.38.1"
   }
 }
