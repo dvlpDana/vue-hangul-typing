@@ -15,5 +15,8 @@ export default defineConfig({
     // 브라우저 환경에서 테스트하는 것을 명시
     environment: "jsdom",
     root: fileURLToPath(new URL("./", import.meta.url)),
+    coverage: {
+      provider: "v8",
+    },
   },
 });
