@@ -22,7 +22,7 @@ https://github.com/user-attachments/assets/31338d1b-fcae-4be1-996a-9043d6d2a3f4
 컴포넌트를 설치하려면 npm을 사용할 수 있습니다.
 
 ```bash
-npm install hangul-typing
+npm i vue-hangul-typing
 ```
 
 
