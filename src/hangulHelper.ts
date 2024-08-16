@@ -93,21 +93,18 @@ function assembleHangul(disassembled: string[]): string {
           result = result.slice(0, -1);
         }
       }
-      cho = undefined;
-      jung = undefined;
-      jong = undefined;
+      [cho, jung, jong] = [undefined, undefined, undefined];
     } else if (_isCho(char)) {
       if (cho && jung) {
         if (jong) {
           result += combineHangul(cho, jung, jong);
-          cho = char;
-          jung = undefined;
-          jong = undefined;
+
+          [cho, jung, jong] = [char, undefined, undefined];
         } else {
           if (i + 1 < disassembled.length && _isJung(disassembled[i + 1])) {
             result += combineHangul(cho, jung);
-            cho = char;
-            jung = undefined;
+
+            [cho, jung] = [char, undefined];
           } else {
             jong = char as Jong;
           }
@@ -118,9 +115,8 @@ function assembleHangul(disassembled: string[]): string {
     } else if (_isJung(char)) {
       if (jung) {
         result += combineHangul(cho, jung, jong);
-        cho = undefined;
-        jung = char;
-        jong = undefined;
+
+        [cho, jung, jong] = [undefined, char, undefined];
       } else {
         jung = char;
       }
@@ -128,24 +124,21 @@ function assembleHangul(disassembled: string[]): string {
       if (jung) {
         if (jong) {
           result += combineHangul(cho, jung, jong);
-          cho = undefined;
-          jung = undefined;
-          jong = char;
+
+          [cho, jung, jong] = [undefined, undefined, char];
         } else {
           jong = char;
         }
       } else {
         result += combineHangul(cho, jung, jong);
-        cho = char as Cho;
-        jung = undefined;
-        jong = undefined;
+
+        [cho, jung, jong] = [char as Cho, undefined, undefined];
       }
     } else {
       result += combineHangul(cho, jung, jong);
       result += char;
-      cho = undefined;
-      jung = undefined;
-      jong = undefined;
+
+      [cho, jung, jong] = [undefined, undefined, undefined];
     }
   }
 

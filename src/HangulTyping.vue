@@ -74,7 +74,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const currentText = ref("");
     const typingInterval = ref<ReturnType<typeof setInterval> | undefined>(
-      undefined
+      undefined,
     );
     const isTyping = ref(true);
     const currentIndex = ref(0);
@@ -102,7 +102,7 @@ export default defineComponent({
           currentIndex.value = 0;
           setTimeout(
             () => startTyping(),
-            getRandomInterval(props.intervalType)
+            getRandomInterval(props.intervalType),
           );
         }
       }
