@@ -1,6 +1,6 @@
 {
   "name": "vue-hangul-typing",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": "ShimDahnBee",
   "description": "A Vue.js component that provides a typing effect for Hangul.",
   "main": "dist/hangul-typing.common.js",

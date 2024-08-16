@@ -70,7 +70,7 @@ npm i vue-hangul-typing
 
 <script setup lang="ts">
 import { ref } from "vue";
-import HangulTyping from "@/HangulTyping.vue";
+import HangulTyping from 'vue-hangul-typing';
 
 const typingCompleted = ref(false);
 const typingTime = ref(0);
@@ -139,7 +139,7 @@ const handleTypingEnd = () => {
 
 <script setup lang="ts">
 import { ref } from "vue";
-import HangulTyping from "@/HangulTyping.vue";
+import HangulTyping from 'vue-hangul-typing';
 
 const pauseTyping = () => {
   HangulTyping.value.pauseTyping();
