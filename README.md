@@ -1,4 +1,4 @@
-# Hangul Typing Component
+# Vue Hangul Typing
 
 ![Codecov](https://codecov.io/gh/dvlpDana/vue-hangul-typing/branch/main/graph/badge.svg)
 
